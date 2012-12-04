@@ -1,0 +1,6 @@
+Things you NEED to do before using this simple tool:
+
+1. Edit GoAgentStarter.py, change the PATH variable to the local path of your goagent directory.
+2. (Optional) If you would like to use the desktop starter, edit GoAgentStarter, change "Exec=python /home/adamzheng/GoAgent.py" to "Exec=python absolute path of GoAgentStarter.py".
+
+Good luck.
