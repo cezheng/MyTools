@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+# 12/07/2012 Ce Zheng
+# crontab script to auto classify the files of my browsers download directory.
+# typically we set this tool to run daily
+# e.g. type "crontab -e" in bash
+# add a line "0 19 * * * /home/adamzheng/crontabs/download-classifier /home/adamzheng/Downloads >/dev/null 2>&1"
+# this will set the script to be run on 7 pm daily.
+use strict;
+my $path=$ARGV[0];
+opendir my $dir,$path or die "Cannot open directory: $path";
+my @files=grep { /^[^\.]/ && -f "$path/$_" } readdir $dir;
+for my $file (@files){
+        my $ext=$1 if $file=~/\.([^\.]+)$/;
+        if($ext){
+                mkdir "$path/$ext" or die "Cannot mkdir $path/$ext" unless -d "$path/$ext";
+                rename("$path/$file","$path/$ext/$file") or die "Cannot mv $path/$file to $path/$ext/$file";
+        }
+}
+exit(0);
